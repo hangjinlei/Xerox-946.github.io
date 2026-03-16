@@ -1,0 +1,131 @@
+.site-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  gap: 12px;
+  padding-inline: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.site-toolbar__title-group {
+  display: grid;
+  gap: 2px;
+}
+
+.site-toolbar__title {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.site-toolbar__subtitle {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.site-toolbar__spacer {
+  flex: 1;
+}
+
+.site-layout {
+  min-height: calc(100vh - 64px);
+}
+
+.site-sidenav {
+  width: 320px;
+  padding: 20px 16px;
+  border-right: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 240, 0.92));
+}
+
+.site-sidenav__header {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.site-sidenav__header h2,
+.site-sidenav__header p {
+  margin: 0;
+}
+
+.site-sidenav__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  color: var(--mat-sys-primary);
+  font-weight: 600;
+}
+
+:host ::ng-deep .active-link {
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--mat-sys-primary) 10%, white);
+}
+
+.site-sidenav__note {
+  margin-top: 20px;
+  border-radius: 24px;
+}
+
+.site-main {
+  width: min(var(--site-max-width), calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.site-banner {
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  margin-bottom: 24px;
+  border-radius: 28px;
+  background:
+    linear-gradient(120deg, rgba(134, 36, 18, 0.92), rgba(255, 111, 0, 0.82)),
+    url('../../../../public/assets/images/抗击疫情.png') right bottom / contain no-repeat;
+  color: white;
+  box-shadow: 0 20px 48px rgba(93, 32, 13, 0.26);
+}
+
+.site-banner h1,
+.site-banner p {
+  margin: 0;
+  max-width: 760px;
+}
+
+.site-content {
+  min-height: 60vh;
+}
+
+.site-footer {
+  padding: 20px 16px 32px;
+  text-align: center;
+  color: color-mix(in srgb, var(--mat-sys-on-surface) 70%, white);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (max-width: 959px) {
+  .site-layout {
+    min-height: calc(100vh - 56px);
+  }
+
+  .site-toolbar {
+    min-height: 56px;
+  }
+
+  .site-toolbar a {
+    display: none;
+  }
+
+  .site-main {
+    width: min(var(--site-max-width), calc(100% - 20px));
+    padding-top: 16px;
+  }
+
+  .site-banner {
+    padding: 24px;
+    background-size: 180px;
+  }
+}

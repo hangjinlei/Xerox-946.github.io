@@ -1,0 +1,41 @@
+<div class="page-shell">
+  <section class="page-hero content-grid content-grid--two">
+    <div class="page-hero__content">
+      <p class="page-eyebrow">知识普及</p>
+      <h2 class="page-title">新型冠状病毒相关知识</h2>
+      <p class="page-subtitle">
+        将原来的长篇文字页面拆成可展开的 Material 科普面板，便于按主题阅读，也更适合手机端逐段查看。
+      </p>
+      <mat-chip-set class="chip-row">
+        <mat-chip>口罩选择</mat-chip>
+        <mat-chip>易感人群</mat-chip>
+        <mat-chip>传播途径</mat-chip>
+        <mat-chip>密切接触者</mat-chip>
+        <mat-chip>临床表现</mat-chip>
+      </mat-chip-set>
+    </div>
+
+    <mat-card class="section-card knowledge-cover">
+      <img mat-card-image src="assets/images/4.jpg" alt="知识普及主图" />
+    </mat-card>
+  </section>
+
+  <mat-accordion class="knowledge-topics" multi>
+    @for (topic of knowledgeTopics; track topic.title; let idx = $index) {
+      <mat-expansion-panel [expanded]="idx === 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ topic.title }}</mat-panel-title>
+          <mat-panel-description>点击展开阅读</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        @if (topic.image) {
+          <img class="knowledge-topic__image" [src]="topic.image" [alt]="topic.title" />
+        }
+
+        @for (paragraph of topic.paragraphs; track paragraph) {
+          <p>{{ paragraph }}</p>
+        }
+      </mat-expansion-panel>
+    }
+  </mat-accordion>
+</div>

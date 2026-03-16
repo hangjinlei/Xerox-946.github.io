@@ -1,0 +1,43 @@
+.quiz-cover__images {
+  display: grid;
+  gap: 16px;
+}
+
+.quiz-cover__images img {
+  width: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.quiz-form {
+  display: grid;
+  gap: 20px;
+}
+
+.question-options {
+  display: grid;
+  gap: 12px;
+}
+
+.validation-error {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0 0;
+  color: var(--mat-sys-error);
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.result-card mat-progress-bar {
+  margin: 8px 0 16px;
+}
+
+.result-card__chips {
+  margin-bottom: 16px;
+}

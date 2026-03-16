@@ -1,0 +1,25 @@
+.updates-cover img {
+  max-height: 340px;
+  object-fit: cover;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.overview-card__label {
+  margin-bottom: 8px;
+  color: var(--mat-sys-primary);
+  font-weight: 600;
+}
+
+.overview-card h3 {
+  margin: 0 0 8px;
+  font: var(--mat-sys-headline-small);
+}
+
+.updates-tab {
+  padding: 20px;
+}

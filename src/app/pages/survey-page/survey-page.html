@@ -1,0 +1,101 @@
+<div class="page-shell">
+  <section class="page-hero content-grid content-grid--two">
+    <div class="page-hero__content">
+      <p class="page-eyebrow">信息调查</p>
+      <h2 class="page-title">填写你的联系信息与留言</h2>
+      <p class="page-subtitle">
+        原来的原生表单已全部切换成 Material 表单域、按钮和反馈提示，同时保留原字段结构：姓、名、电子邮箱、电话与留言。
+      </p>
+      <mat-chip-set class="chip-row">
+        @for (tip of surveyTips; track tip) {
+          <mat-chip>{{ tip }}</mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+
+    <mat-card class="section-card survey-cover">
+      <mat-card-content class="survey-cover__images">
+        <img src="assets/images/中国加油.jpg" alt="中国加油" />
+        <img src="assets/images/文字.jpg" alt="宣传文字" />
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <mat-card class="section-card">
+    <mat-card-header>
+      <mat-card-title>信息调查表</mat-card-title>
+      <mat-card-subtitle>带 * 的字段为必填项</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="survey-form" [formGroup]="surveyForm" (ngSubmit)="submitSurvey()">
+        <div class="survey-form__row">
+          <mat-form-field appearance="outline">
+            <mat-label>* 姓</mat-label>
+            <input matInput formControlName="firstName" />
+            @if (surveyForm.controls.firstName.touched && surveyForm.controls.firstName.hasError('required')) {
+              <mat-error>请输入姓氏</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>* 名</mat-label>
+            <input matInput formControlName="lastName" />
+            @if (surveyForm.controls.lastName.touched && surveyForm.controls.lastName.hasError('required')) {
+              <mat-error>请输入名字</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="survey-form__row">
+          <mat-form-field appearance="outline">
+            <mat-label>* 电子邮箱</mat-label>
+            <input matInput formControlName="email" />
+            @if (surveyForm.controls.email.touched && surveyForm.controls.email.hasError('required')) {
+              <mat-error>请输入邮箱</mat-error>
+            }
+            @if (surveyForm.controls.email.touched && surveyForm.controls.email.hasError('email')) {
+              <mat-error>邮箱格式不正确</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>电话</mat-label>
+            <input matInput formControlName="phone" />
+            <mat-hint>最多 12 位</mat-hint>
+            @if (surveyForm.controls.phone.touched && surveyForm.controls.phone.hasError('maxlength')) {
+              <mat-error>电话长度不能超过 12 位</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="survey-form__full-width">
+          <mat-label>* 留言</mat-label>
+          <textarea matInput rows="5" formControlName="comments"></textarea>
+          @if (surveyForm.controls.comments.touched && surveyForm.controls.comments.hasError('required')) {
+            <mat-error>请输入留言内容</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="survey-form__actions">
+          <button mat-flat-button color="primary" type="submit">提交</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  @if (submitted()) {
+    <mat-card class="section-card success-card success-state">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>check_circle</mat-icon>
+        <mat-card-title>提交成功</mat-card-title>
+        <mat-card-subtitle>
+          感谢 {{ surveyForm.controls.firstName.value }}{{ surveyForm.controls.lastName.value }} 的反馈。
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>我们已记录你的邮箱：{{ surveyForm.controls.email.value }}</p>
+        <p>留言内容：{{ surveyForm.controls.comments.value }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

@@ -1,0 +1,83 @@
+<div class="page-shell">
+  <section class="page-hero content-grid content-grid--two">
+    <div class="page-hero__content">
+      <p class="page-eyebrow">相关题目</p>
+      <h2 class="page-title">防疫知识答题卡</h2>
+      <p class="page-subtitle">
+        原页面中的单选题已经完整迁移到 Angular 响应式表单中，所有选项、按钮和反馈都使用 Material 组件实现。
+      </p>
+      <mat-chip-set class="chip-row">
+        <mat-chip>10 道题</mat-chip>
+        <mat-chip>即时评分</mat-chip>
+        <mat-chip>响应式表单</mat-chip>
+      </mat-chip-set>
+    </div>
+
+    <mat-card class="section-card quiz-cover">
+      <mat-card-content class="quiz-cover__images">
+        <img src="assets/images/大军.jpg" alt="防疫图片一" />
+        <img src="assets/images/战疫.jpg" alt="防疫图片二" />
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <form class="quiz-form" [formGroup]="quizForm" (ngSubmit)="submitQuiz()">
+    @for (question of quizQuestions; track question.id; let idx = $index) {
+      <mat-card class="section-card question-card">
+        <mat-card-header>
+          <mat-card-title>Q{{ idx + 1 }}. {{ question.question }}</mat-card-title>
+          <mat-card-subtitle>请选择一个最合适的答案</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-radio-group class="question-options" [formControlName]="question.id">
+            @for (option of question.options; track option.value) {
+              <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
+            }
+          </mat-radio-group>
+
+          @if (controlFor(question.id).invalid && controlFor(question.id).touched) {
+            <p class="validation-error">
+              <mat-icon>error</mat-icon>
+              这一题还没有作答。
+            </p>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+
+    <div class="quiz-actions">
+      <button mat-flat-button color="primary" type="submit">提交答案</button>
+      <button mat-stroked-button type="button" (click)="resetQuiz()">重新作答</button>
+    </div>
+  </form>
+
+  @if (submitted()) {
+    <mat-card class="section-card result-card result-state">
+      <mat-card-header>
+        <mat-card-title>答题结果</mat-card-title>
+        <mat-card-subtitle>本次得分 {{ score() }} / {{ quizQuestions.length }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-progress-bar mode="determinate" [value]="percentage()"></mat-progress-bar>
+        <div class="chip-row result-card__chips">
+          <mat-chip>{{ percentage() | number: '1.0-0' }}%</mat-chip>
+          <mat-chip>{{ score() >= 8 ? '优秀' : score() >= 6 ? '良好' : '继续加油' }}</mat-chip>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <mat-list>
+          @for (question of quizQuestions; track question.id) {
+            <mat-list-item>
+              <mat-icon matListItemIcon>
+                {{ controlFor(question.id).value === question.answer ? 'check_circle' : 'cancel' }}
+              </mat-icon>
+              <div matListItemTitle>{{ question.question }}</div>
+              <div matListItemLine>正确答案：{{ question.answer }}</div>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

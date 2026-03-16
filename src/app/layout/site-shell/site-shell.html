@@ -1,0 +1,95 @@
+<mat-toolbar class="site-toolbar" color="primary">
+  <button mat-icon-button type="button" (click)="drawer.toggle()" aria-label="切换导航">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="site-toolbar__title-group">
+    <span class="site-toolbar__title">中国加油 · 防疫知识站</span>
+    <span class="site-toolbar__subtitle">Angular + Material 重构版</span>
+  </div>
+
+  <span class="site-toolbar__spacer"></span>
+
+  <a mat-stroked-button href="https://github.com/hangjinlei/Xerox-946.github.io" target="_blank" rel="noopener">
+    <mat-icon>open_in_new</mat-icon>
+    GitHub
+  </a>
+</mat-toolbar>
+
+<mat-sidenav-container class="site-layout">
+  <mat-sidenav
+    #drawer
+    class="site-sidenav"
+    [mode]="isMobile() ? 'over' : 'side'"
+    [opened]="!isMobile()"
+  >
+    <div class="site-sidenav__header">
+      <p class="site-sidenav__eyebrow">专题导航</p>
+      <h2>{{ activeItem().label }}</h2>
+      <p>{{ activeItem().summary }}</p>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <mat-nav-list>
+      @for (item of navItems; track item.path) {
+        <a
+          mat-list-item
+          [routerLink]="item.path"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+          (click)="closeIfMobile(drawer)"
+        >
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <div matListItemTitle>{{ item.label }}</div>
+          <div matListItemLine>{{ item.summary }}</div>
+        </a>
+      }
+    </mat-nav-list>
+
+    <mat-card appearance="outlined" class="site-sidenav__note">
+      <mat-card-header>
+        <mat-card-title>重构说明</mat-card-title>
+        <mat-card-subtitle>全部交互控件已切换到 Material</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="chip-row">
+          <mat-chip>导航抽屉</mat-chip>
+          <mat-chip>卡片布局</mat-chip>
+          <mat-chip>问卷表单</mat-chip>
+          <mat-chip>单选题库</mat-chip>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main class="site-main">
+      <section class="site-banner">
+        <div>
+          <p class="page-eyebrow">共同守护健康</p>
+          <h1>中国加油！武汉加油！</h1>
+          <p>
+            保留原站内容结构，用 Angular 路由承载 6 个主题页面，并通过 Material
+            组件统一导航、表单、题卡和信息展示体验。
+          </p>
+        </div>
+        <div class="chip-row">
+          <mat-chip-set>
+            <mat-chip>Angular 20</mat-chip>
+            <mat-chip>Angular Material</mat-chip>
+            <mat-chip>GitHub Pages</mat-chip>
+          </mat-chip-set>
+        </div>
+      </section>
+
+      <section class="site-content">
+        <router-outlet></router-outlet>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Copyright © 2020 浙江树人大学计算机专业项浩楠 · Angular 重构与发布支持：GitHub Copilot</p>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,67 @@
+<div class="page-shell">
+  <section class="page-hero content-grid content-grid--two">
+    <div class="page-hero__content">
+      <p class="page-eyebrow">防疫宣传</p>
+      <h2 class="page-title">浙江省防疫宣传口号</h2>
+      <p class="page-subtitle">
+        原页面的 5 条温馨提示被重构为可展开的 Material 面板，适合在桌面和移动端快速浏览与重点展开。
+      </p>
+      <mat-chip-set class="chip-row">
+        <mat-chip>戴口罩</mat-chip>
+        <mat-chip>勤洗手</mat-chip>
+        <mat-chip>少聚集</mat-chip>
+        <mat-chip>勤通风</mat-chip>
+        <mat-chip>早就医</mat-chip>
+      </mat-chip-set>
+    </div>
+
+    <mat-card class="section-card campaign-visuals">
+      <mat-card-header>
+        <mat-card-title>宣传视觉</mat-card-title>
+        <mat-card-subtitle>延续原站的图片与视频素材</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="campaign-visuals__content">
+        <img src="assets/images/2.jpg" alt="宣传横幅" />
+        <img src="assets/images/1.jpg" alt="宣传视频封面" />
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-flat-button color="primary" href="#/survey">参与信息调查</a>
+        <a mat-stroked-button href="#/knowledge">查看知识普及</a>
+      </mat-card-actions>
+    </mat-card>
+  </section>
+
+  <mat-accordion class="campaign-panels" multi>
+    @for (message of campaignMessages; track message.title; let idx = $index) {
+      <mat-expansion-panel [expanded]="idx === 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ message.title }}</mat-panel-title>
+          <mat-panel-description>{{ message.summary }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{ message.detail }}</p>
+      </mat-expansion-panel>
+    }
+  </mat-accordion>
+
+  <mat-card class="section-card action-card">
+    <mat-card-header>
+      <mat-card-title>一句话行动倡议</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="action-grid">
+        <div>
+          <mat-icon>favorite</mat-icon>
+          <span>减少聚集，把关心留在线上。</span>
+        </div>
+        <div>
+          <mat-icon>sanitizer</mat-icon>
+          <span>规范洗手与手卫生，降低接触传播风险。</span>
+        </div>
+        <div>
+          <mat-icon>volunteer_activism</mat-icon>
+          <span>保护自己，也是在保护家人、同学与社区。</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,28 @@
+.knowledge-cover {
+  overflow: hidden;
+}
+
+.knowledge-cover img {
+  max-height: 340px;
+  object-fit: cover;
+}
+
+.knowledge-topics {
+  display: grid;
+  gap: 14px;
+}
+
+.knowledge-topics mat-expansion-panel {
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+.knowledge-topic__image {
+  width: min(280px, 100%);
+  margin-bottom: 16px;
+  border-radius: 20px;
+}
+
+.knowledge-topics p {
+  line-height: 1.8;
+}

@@ -1,0 +1,100 @@
+<div class="page-shell">
+  <section class="page-hero content-grid content-grid--two">
+    <div class="page-hero__content">
+      <p class="page-eyebrow">首页总览</p>
+      <h2 class="page-title">2020 年新型冠状病毒疫情</h2>
+      <p class="page-subtitle">
+        这里保留了原首页中的核心信息，并通过 Material 卡片、标签与媒体控制条重构为更适合浏览和移动端访问的形式。
+      </p>
+
+      <mat-chip-set class="chip-row">
+        <mat-chip>病原检测</mat-chip>
+        <mat-chip>疫情信息</mat-chip>
+        <mat-chip>防控方案</mat-chip>
+        <mat-chip>医疗支援</mat-chip>
+        <mat-chip>物资调备</mat-chip>
+      </mat-chip-set>
+
+      <div class="highlight-list">
+        @for (item of homeHighlights; track item) {
+          <mat-card appearance="outlined" class="highlight-card">
+            <mat-card-content>
+              <div class="highlight-card__inner">
+                <mat-icon>check_circle</mat-icon>
+                <p>{{ item }}</p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </div>
+
+    <mat-card class="media-card section-card">
+      <mat-card-header>
+        <mat-card-title>宣传视频与主视觉</mat-card-title>
+        <mat-card-subtitle>使用 Material 按钮替代原生视频控件</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="media-card__content">
+        <video #previewVideo poster="assets/images/1.jpg" preload="metadata">
+          <source src="assets/视频.mp4" type="video/mp4" />
+        </video>
+        <img src="assets/images/2.jpg" alt="防疫首页横幅" />
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" type="button" (click)="togglePlayback()">
+          <mat-icon>{{ isPlaying() ? 'pause_circle' : 'play_circle' }}</mat-icon>
+          {{ isPlaying() ? '暂停视频' : '播放视频' }}
+        </button>
+        <button mat-stroked-button type="button" (click)="toggleMute()">
+          <mat-icon>{{ isMuted() ? 'volume_off' : 'volume_up' }}</mat-icon>
+          {{ isMuted() ? '取消静音' : '静音' }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </section>
+
+  <section class="feature-grid">
+    @for (feature of homeFeatures; track feature.title) {
+      <mat-card class="section-card feature-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>{{ feature.icon }}</mat-icon>
+          <mat-card-title>{{ feature.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ feature.summary }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </section>
+
+  <mat-card class="section-card narrative-card">
+    <mat-card-header>
+      <mat-card-title>重点内容回顾</mat-card-title>
+      <mat-card-subtitle>根据原始静态页面整理</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="narrative-grid">
+        <div>
+          <h3>病源检测</h3>
+          <p>
+            1 月 7 日 21 时，实验室检出一种新型冠状病毒，获得该病毒的全基因组序列，并通过核酸检测方法检出多例阳性结果。后续研究也通过全基因组数据解析，对传染源和扩散路径进行了追溯。
+          </p>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div>
+          <h3>疫情信息</h3>
+          <p>
+            及时、准确、全面地发布疫情进展，是减少公众疑虑、提升防控执行力的关键。活动轨迹、疫情地图、小程序和官方 App 渠道，都提升了信息获取的便利性。
+          </p>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div>
+          <h3>防控方案与物资保障</h3>
+          <p>
+            国家层面持续更新诊疗、防控和病例监测方案；与此同时，中央医药储备、财政补助和多地医疗队伍不断向重点地区提供支持，形成了制度、人员和物资的联合防线。
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
